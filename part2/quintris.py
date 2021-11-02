@@ -310,7 +310,7 @@ class ComputerPlayer:
     #   - quintris.left(), quintris.right(), quintris.down(), and quintris.rotate() can be called to actually
     #     issue game commands
     #   - quintris.get_board() returns the current state of the board, as a list of strings.
-    #
+    #what
     def control_game(self, quintris):
         # another super simple algorithm: just move piece to the least-full column
         while 1:
