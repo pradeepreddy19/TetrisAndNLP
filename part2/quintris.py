@@ -71,6 +71,7 @@ class ComputerPlayer:
          #   print(i)
        # print(len(quintris.get_board()),"X", len(quintris.get_board()[0]))
        # print("***********************************This is where the code understanding snippets ends************************************")
+        print(quintris.get_piece()[1:])
         moves= self.successor_boards(quintris.get_piece(),quintris.get_board())
         
         return moves
