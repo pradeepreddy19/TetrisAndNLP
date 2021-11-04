@@ -370,19 +370,13 @@ def tree_1_2(board, player):
 
 
     tree = [] # (depth, nodes by parent)
-    tree_meta =[] #(depth, max_node?)
 
     # place initial_board at root node 
     #(board, depth, parent_idx)
     d = 0
-    max_node = True
-    tree_meta.append((d, max_node))
     tree.append([[board, d, 'na', float('-inf')]])
 
-
     d = 1
-    max_node = False
-
     #whose turn is it?
     if d % 2 == 1:
         who_moves = player
@@ -391,13 +385,13 @@ def tree_1_2(board, player):
 
     #add successors to tree
     parent_boards = [node[0] for node in tree[d-1]]
+
     d_nodes = []
     for n, parent_board in enumerate(parent_boards):
         d_nodes.append([[succ, d, n, float('inf')] for succ in successors(parent_board, who_moves)])
     tree.append(d_nodes)
-    tree_meta.append((d,max_node, len(d_nodes)))
 
-    return tree, tree_meta
+    return tree
 
 def is_terminal_state(board, player):
     # count number of pieces each player had on the board
@@ -468,9 +462,8 @@ def add_to_tree(tree, d, player, opp_player):
             d_nodes.append([[succ, d, n, alpha_beta]for succ in successors(board, who_moves)])
     tree.append(d_nodes)
 
-    tree_meta.append((d, max_node, len(d_nodes)))
 
-    return tree, tree_meta
+    return tree
 
 def weighted_pieces(board, player):
 
@@ -550,7 +543,7 @@ def pi_pik_travel(board, player):
         return 0
 
 def evaluation_func(board, player, opp_player):
-    weights = [7, 2, 1]
+    weights = [7, 5, 1]
     features = np.array([weighted_pieces(board, player),
                         jump_moves_avail(board, player)-jump_moves_avail(board, opp_player),
                         pi_pik_travel(board, player)-pi_pik_travel(board,opp_player)])
@@ -558,8 +551,8 @@ def evaluation_func(board, player, opp_player):
     return sum(features*weights)
 
 
+###  given (N, player (w or b), board, timelimit (sec)) return the next best move for the player
 def find_best_move(board, N, player, timelimit):
-    
     choice_str = board
 
     while True:
@@ -576,17 +569,14 @@ def find_best_move(board, N, player, timelimit):
         board = board_to_grid(board, N)
 
         # first two layers of tree
-        tree, tree_meta = tree_1_2(board, player)
+        tree = tree_1_2(board, player)
 
         # check if there is a winning move availalbe
         win = win_in_avail_moves(tree)
         if win[0]:
             choice_str = win[1]
-            # print('for the win')
-            # print(choice_str)
             
         else:
-            # print('no winning moves, but here is the best choice for now')
             d = len(tree)-1
             for i, group in enumerate(tree[d]):
                 group_max = [0,i,'']
@@ -597,12 +587,10 @@ def find_best_move(board, N, player, timelimit):
 
             choice = tree[d][group_max[1]][group_max[2]][0]
             choice_str = ''.join([str(x) for x in choice.flatten()])
-            # print(choice_str)
 
             #if no winning moves are available, build the game tree to horizon
             # current depth of tree (root is 0)
             d = len(tree)-1
-            # print(f'current tree {tree_meta}')
 
             #depth of next layer of tree (root is 0)
             d = len(tree)
@@ -612,7 +600,6 @@ def find_best_move(board, N, player, timelimit):
             for i in range(horizon):
                 add_to_tree(tree,d, player, opp_player)
                 d+=1
-                # print(len(tree), tree_meta)
             
 
             #minimize
@@ -633,7 +620,7 @@ def find_best_move(board, N, player, timelimit):
             #board for max of mins
             choice = tree[1][0][max_of_mins][0]
             choice_str = ''.join([str(x) for x in choice.flatten()])
-            # print(choice_str)
+
 
 
 if __name__ == "__main__":
