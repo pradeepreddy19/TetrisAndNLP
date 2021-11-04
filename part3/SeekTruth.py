@@ -6,6 +6,7 @@
 #
 
 import sys
+import math
 
 def load_file(filename):
     objects=[]
@@ -33,7 +34,58 @@ def load_file(filename):
 #
 def classifier(train_data, test_data):
     # This is just dummy code -- put yours here!
-    return [test_data["classes"][0]] * len(test_data["objects"])
+    truthful_dict={}
+    deceptive_dict={}
+    truthful_count=0
+    deceptive_count=0
+    for index,sentence in enumerate(train_data["objects"]):
+        if train_data["labels"][index] == "truthful" :
+            words=sentence.split(" ")
+            for word in words:
+                truthful_count=truthful_count+1
+                if word in truthful_dict.keys() :
+                    truthful_dict[word]+=1
+                else:
+                    truthful_dict[word]=1
+        elif train_data["labels"][index] == "deceptive" :
+            words=sentence.split(" ")
+            for word in words:
+                deceptive_count= deceptive_count+1
+                if word in deceptive_dict.keys() :
+                    deceptive_dict[word]+=1
+                else:
+                    deceptive_dict[word]=1
+        print(truthful_count,deceptive_count)
+    for each in truthful_dict:
+        truthful_dict[each]=(truthful_dict[each]/truthful_count)
+    for each in deceptive_dict:
+        deceptive_dict[each]=deceptive_dict[each]/deceptive_count
+        
+        #test data traversal
+    test_labels=[]
+    truth_prob=1
+    decep_prob=1
+
+    for sentence in test_data["objects"]:
+        words=sentence.split(" ")
+        for word in words:                 
+            if word in truthful_dict.keys():
+                truth_prob=(truth_prob)-math.log(truthful_dict[word])
+            else:
+                truth_prob+=-math.log(1/truthful_count)
+            if word in deceptive_dict.keys():
+                decep_prob=(decep_prob)-math.log(deceptive_dict[word] )
+            else:
+                decep_prob+=-math.log(1/deceptive_count)
+
+        if truth_prob<=decep_prob:
+            test_labels.append("truthful")
+        else:
+            test_labels.append("deceptive")
+
+   
+    print(test_labels)
+    return test_labels
 
 
 if __name__ == "__main__":
@@ -50,7 +102,8 @@ if __name__ == "__main__":
 
     # make a copy of the test data without the correct labels, so the classifier can't cheat!
     test_data_sanitized = {"objects": test_data["objects"], "classes": test_data["classes"]}
-
+    # print("train-----------------\n",train_data["labels"])
+    # print("test------------------------\n",test_data_sanitized)
     results= classifier(train_data, test_data_sanitized)
 
     # calculate accuracy
