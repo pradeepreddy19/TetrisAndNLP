@@ -139,7 +139,7 @@ class ComputerPlayer:
 
 
         elif type_val=="less_gaps":
-            gaps=0
+            gaps=0  
             empties=[]
             for i in range(len(board)):
                 if 'x' in board[i]:
@@ -343,7 +343,11 @@ class ComputerPlayer:
                         #     print(i+"|||||")
 
         ##############################################################################################################
-
+                        print("The sucessor board is ")
+                        for each in next_temp_board:
+                            print(each)
+                        print("-------------")
+                        nothing=input()
                         board_val_by_evaluation_function=self.evaluation_function(next_temp_board,"Weighted_row_coverage")
                         temp_moves[temp_move][1]=board_val_by_evaluation_function
                         # print("The value given by the evaluation function is ", board_val_by_evaluation_function)

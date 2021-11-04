@@ -130,8 +130,14 @@ class ComputerPlayer:
                 x_count=sum([1 for i in each if i=="x"])
                 if x_count==15:
                     line_filled+=1
-                
-            return gaps-height+column_gap-line_filled
+            
+            # print("Gaps: ",gaps)
+            # print("Height: ",height)
+            # print("Column Gap: ",column_gap)
+            # print("Line Filled: ",line_filled*10000)
+            # print("Value: ",val)
+            a,b,c,d,e = 0,0,0,-10000,1
+            return a*gaps+b*height+c*column_gap+d*line_filled + e*val
 
 
         elif type_val=="less_gaps":
@@ -176,11 +182,11 @@ class ComputerPlayer:
 
 
     def get_x_positions(self, piece, val_col):
-        if piece[0][0][0]=="x":
+        if piece[0][-1][0]=="x":
             val_col=val_col+0
-        elif piece[0][0][1]=="x":
+        elif piece[0][-1][1]=="x":
             val_col=val_col-1
-        elif piece[0][0][2]=="x":
+        elif piece[0][-1][2]=="x":
             val_col=val_col-2
         else:
             val_col=val_col-3
@@ -303,15 +309,15 @@ class ComputerPlayer:
             else:
                 rotate_moves="n"*(int(each/90))
             ## Try moving the piece to all possible left and right positions and then calculate the evaluation function
-            for i in possible_moves:
+            for i in range(len(board[0])):
                 x_positions=self.get_x_positions(piece,i)
                 # print(x_positions)
                 legal_pos_flg=self.legal_positions(x_positions,n_row,n_col)
                 # print(x_positions,legal_pos_flg)
-                if legal_pos_flg and x_col-i>0:
-                    moves[rotate_moves+"b"*(x_col-i)]=[x_positions,9999999]
+                if legal_pos_flg and x_col-i>=0:
+                    moves[rotate_moves+"b"*(x_col-i)]=[x_positions,9999999,rotated_pieces[each][1]]
                 elif legal_pos_flg:
-                    moves[rotate_moves+"m"*(i-x_col)]=[x_positions,9999999]
+                    moves[rotate_moves+"m"*(i-x_col)]=[x_positions,9999999,rotated_pieces[each][1]]
             # print(moves)
 
             # print(x_row, x_col, possible_left, possible_right)
@@ -332,28 +338,53 @@ class ComputerPlayer:
             # Try moving piece down:
             for move in moves:
                 x_positions=moves[move][0].copy()
+                # print("Piece size",len(x_positions))
                 temp_board=board.copy()
+                print_board=temp_board.copy()
 
                 for i in range(len(temp_board)):
+                    print_board=temp_board.copy()
                 # print("I love EAI class because of the ----",i)
                     val=0
                     flag=0
                     val= sum([1 for j in x_positions if  temp_board[j[0]][j[1]]=="x"])
 
+                    # collision_state=[]
+                    # state=True
+                    # while(state):
+                    #     for i in range(len(x_positions)):                            
+                    #         state=quintris.check_collision(temp_board,0,moves[move][2],x_positions[i][0],x_positions[i][1])
+                    #         if state == False:
+                    #             x_positions[i]=(x_positions[i][0]+1,x_positions[i][1])
+
                     if val>0:      
                         for i in range( len(x_positions)):
+                            x_positions_copy= x_positions.copy()
                             x_positions[i][0]=x_positions[i][0]-1
+                            if not self.legal_positions(x_positions,n_row,n_col):
+                                x_positions=x_positions_copy.copy()
+
                         break
 
                     else:
-                        for i  in range(len( x_positions)):
-                            row_index=[i[0]   for i in x_positions]
-                            if max(row_index)<24:
+                        row_index=[i[0]   for i in x_positions]
+                        if max(row_index)<24:
+                            for i in range(0,5):
+                                # x_positions_copy= x_positions.copy()
                                 x_positions[i][0]=x_positions[i][0]+1
-                            else:
-                                flag=1
+                                # if not self.legal_positions(x_positions,n_row,n_col):
+                                #     x_positions=x_positions_copy.copy()
+                        else:
+                            flag=1
                     if flag==1:
-                        break                    
+                        break  
+
+                    for i in x_positions:
+                        print_board[i[0]]= print_board[i[0]][0:i[1]]+"x"+print_board[i[0]][i[1]+1:]
+                    # for item3 in print_board:
+                    #     print(item3)
+                    
+                    # print(x_positions)                  
                 # print(x_positions)
                 # print("Board before assignment")
                 # for i in temp_board:
@@ -363,7 +394,11 @@ class ComputerPlayer:
                 # print("Board after assignment")
                 # for i in temp_board:
                 #     print(i+"|||||")
-
+                # print("The successor board is ")
+                for item in temp_board:
+                    print(item)
+                # print("---------------")
+                nothing =input()
                 board_val_by_evaluation_function=self.evaluation_function(temp_board,"Weighted_row_coverage_and_lessgaps")
                 moves[move][1]=board_val_by_evaluation_function
                 # print("The value given by the evaluation function is ", board_val_by_evaluation_function)
