@@ -21,10 +21,6 @@ class HumanPlayer:
 #####
 # This is the part you'll want to modify!
 # Replace our super simple algorithm with something better
-
-class store_move:
-    def next_move(self):
-        self.next_move=""
 #
 class ComputerPlayer:
        
@@ -75,10 +71,10 @@ class ComputerPlayer:
          #   print(i)
        # print(len(quintris.get_board()),"X", len(quintris.get_board()[0]))
        # print("***********************************This is where the code understanding snippets ends************************************")
-        moves_current= self.successor_boards(quintris.get_piece(),quintris.get_next_piece(),quintris.get_board())
-        
-        return moves_current
-        
+        print(quintris.get_piece()[1:])
+        moves= self.successor_boards(quintris.get_piece(),quintris.get_board())
+        print(moves)
+        return moves
 
     def evaluation_function(self,board,type_val):
 
@@ -177,6 +173,8 @@ class ComputerPlayer:
             return height
 
 
+
+
     def get_x_positions(self, piece, val_col):
         if piece[0][0][0]=="x":
             val_col=val_col+0
@@ -193,10 +191,15 @@ class ComputerPlayer:
          return sum([1 for x in x_positions if x[0]>=0 and x[0]<n_row and x[1]>=0 and x[1]<n_col]) == 5
 
 
-    def successor_boards(self,piece,next_piece,board):
-  
+    def successor_boards(self,piece,board):
+        #print("Move the given piece to left by one block")
+        #quintris.left()
+        #quintris.down()
+        # return "bd"+str(self.evaluation_function(quintris.get_board(),"N_of_empty_blocks"))
         moves={}
 
+        # print("The piece at the beginnig is piece",piece)
+        #Moves include given piece, rotated 90, rotated 180, rotated 270 and their flipped verisons(all rotations
         x_row= piece[1]
         x_col= piece[2]
 
@@ -208,20 +211,98 @@ class ComputerPlayer:
         rotated_90 = [ "".join([ str[i] for str in piece_copy[::-1] ]) for i in range(0, len(piece_copy[0])) ]
         rotated_pieces= { 0: ["",piece_copy], 90: ["n",rotated_90], 180: ["nn", [ str[::-1] for str in piece_copy[::-1] ]], 270: ["nnn",[ str[::-1] for str in rotated_90[::-1] ]] }
 
+        # If the the given piece is symmetric across some axis then we will get duplicates, so lets take a move only that are unique
+        # unique_pieces=[]
+        # while len(rotated_pieces)>0:
+        #     print("Pradeep")
+        #     print(rotated_pieces)
+        #     print("Unique pieces are ",unique_pieces)
+        #     if len(rotated_pieces)>=2:
+        #         keys=list(rotated_pieces.keys())
+        #         for i in range(len(rotated_pieces)-1):
+        #             for j in range(i+1,len(rotated_pieces)):
+        #                 if rotated_pieces[keys[i]]==rotated_pieces[keys[j]]:
+        #                     print("equality")
+        #                     unique_pieces.append(rotated_pieces[i])
+        #                     rotated_pieces.pop(keys[i])
+        #                     keys.pop(i)
+        #                     rotated_pieces.pop(keys[j-1])
+        #                     keys.pop(j-1)
+        #                     break
+        #                 elif i==len(rotated_pieces)-2 and rotated_pieces[keys[0]] not in unique_pieces:
+        #                     unique_pieces.append(rotated_pieces[keys[0]])
+        #                     rotated_pieces.pop(keys[0])
+        #                     keys.pop(0)
+        #                 elif i==len(rotated_pieces)-2 and rotated_pieces[keys[0]] in unique_pieces:
+        #                     rotated_pieces.pop(keys[0])
+        #                     keys.pop(0)
+
+        #     else:
+        #         print("Pradeep in else")
+        #         unique_pieces.append(rotated_pieces[keys[0]])
+        #         rotated_pieces.pop(keys[0])
+
+        # print("The rotated pieces and the unique pieces are the following")
+        # for i in rotated_pieces:
+        #     print("-------------")
+        #     for j in rotated_pieces[i]:
+        #         print(j)
+        # print("___________________- unique pieces are teh followwing ")
+
+        # for i in unique_pieces:
+        #     print("-------------")
+        #     for j in i:
+        #         print(j)
+
+        # # Adding the position and of row and column to the the unique pieces
+
+        # for i in range(len(unique_pieces)):
+        #     unique_pieces[i]= (unique_pieces[i],x_row,x_col)
         
+
+
+        # print(possible_moves)
+
         n_row=len(board)
         n_col=len(board[0])
 
+        # rotated_90 = [ "".join([ str[i] for str in piece[::-1] ]) for i in range(0, len(piece[0])) ]
+        # rotated_pieces= { 0: piece, 90: rotated_90, 180: [ str[::-1] for str in piece[::-1] ], 270: [ str[::-1] for str in rotated_90[::-1] ] }
+
+        # # If the the given piece is symmetric across then we may get duplicates, so lets take a move only that are unique
+        # rotated_pieces_lst=list(rotated_pieces.values)
+        # unique_pieces=[]
+        # while rotated_pieces_lst:
+        #     if len(rotated_pieces_lst)>=2:
+        #         for i in range(len(rotated_pieces_lst)-1):
+        #             if piece[i]==piece[i+1]:
+        #                 unique_pieces.append(piece[i])
+        #                 rotated_pieces_lst.pop(i)
+        #                 rotated_pieces_lst.pop(i+1)
+        #                 break
+        #     else:
+        #         unique_pieces.append(rotated_pieces_lst[0])
+        #         rotated_pieces_lst.pop(0)
+
+        # print("The rotated pieces and the unique pieces are the following")
+        # for i in rotated_pieces:
+        #     print("-------------")
+        #     for j in rotated_pieces[i]:
+        #         print(j)
+        # print("___________________- unique pieces are teh followwing ")
+
+        # for i in rotated_pieces_lst:
+        #     print("-------------")
+        #     for j in i:
+        #         print(j)
 
         for each in rotated_pieces:
-             
             piece=(rotated_pieces[each][1],x_row,x_col)
-            # if bloack return the number of ratations (n's)
             if each ==0:
                 rotate_moves=""
             else:
                 rotate_moves="n"*(int(each/90))
-            # Try moving the piece to all possible left and right positions and then calculate the evaluation function
+            ## Try moving the piece to all possible left and right positions and then calculate the evaluation function
             for i in possible_moves:
                 x_positions=self.get_x_positions(piece,i)
                 # print(x_positions)
@@ -231,7 +312,21 @@ class ComputerPlayer:
                     moves[rotate_moves+"b"*(x_col-i)]=[x_positions,9999999]
                 elif legal_pos_flg:
                     moves[rotate_moves+"m"*(i-x_col)]=[x_positions,9999999]
+            # print(moves)
+
+            # print(x_row, x_col, possible_left, possible_right)
+
+        
+            # piece_copy=piece
+            # piece=piece[0]
+            # ### Took the following code from the backend code
             
+
+            # piece=piece_copy
+            # Understanding the given piece
+            # print("This information is related to the given piece")
+            # print("The size of the given piece is ", len(piece[0]), " ", len(piece[0][0]))
+
             
 
             # Try moving piece down:
@@ -268,90 +363,30 @@ class ComputerPlayer:
                 # print("Board after assignment")
                 # for i in temp_board:
                 #     print(i+"|||||")
-        #         board_val_by_evaluation_function=self.evaluation_function(temp_board,"Weighted_row_coverage")
-        #         moves[move][1]=board_val_by_evaluation_function
-        # pos_moves=[x for x in moves]
-        # eval_moves=[moves[x][1]  for x in moves]
-        # return pos_moves[eval_moves.index(min(eval_moves))][0]
 
-            
-##################################################################################################################################
-                tracked_move=move+"-_-"
-                temp_moves={}
-                piece_copy=next_piece.copy()
-                rotated_90 = [ "".join([ str[i] for str in piece_copy[::-1] ]) for i in range(0, len(piece_copy[0])) ]
-                rotated_pieces= { 0: ["",piece_copy], 90: ["n",rotated_90], 180: ["nn", [ str[::-1] for str in piece_copy[::-1] ]], 270: ["nnn",[ str[::-1] for str in rotated_90[::-1] ]] }
+                board_val_by_evaluation_function=self.evaluation_function(temp_board,"Weighted_row_coverage_and_lessgaps")
+                moves[move][1]=board_val_by_evaluation_function
+                # print("The value given by the evaluation function is ", board_val_by_evaluation_function)
+        # print(moves)
 
-                
-                n_row=len(temp_board)
-                n_col=len(temp_board[0])
+        # print("Pradeep")
+        # print("Successors are the  following:")
+       # print(piece)
+        # piece=piece[0]
+        # ### Took the following code from the backend code 
+        # rotated_90 = [ "".join([ str[i] for str in piece[::-1] ]) for i in range(0, len(piece[0])) ]
+        # rotated_pieces= { 0: piece, 90: rotated_90, 180: [ str[::-1] for str in piece[::-1] ], 270: [ str[::-1] for str in rotated_90[::-1] ] }
+        # for i in rotated_pieces:
+        #     print("-------------")
+        #     for j in rotated_pieces[i]:
+        #         print(j)
+        ## From here it is our own code
+    #    print(piece)
+    #    print(board)
 
-
-                for each in rotated_pieces:
-                    piece=(rotated_pieces[each][1],x_row,x_col)
-                    # if bloack return the number of ratations (n's)
-                    if each ==0:
-                        rotate_moves=""
-                    else:
-                        rotate_moves="n"*(int(each/90))
-                    ## Try moving the piece to all possible left and right positions and then calculate the evaluation function
-                    for i in possible_moves:
-                        x_positions=self.get_x_positions(piece,i)
-                        # print(x_positions)
-                        legal_pos_flg=self.legal_positions(x_positions,n_row,n_col)
-                        # print(x_positions,legal_pos_flg)
-                        if legal_pos_flg and x_col-i>0:
-                            temp_moves[tracked_move+rotate_moves+"b"*(x_col-i)]=[x_positions,9999999]
-                        elif legal_pos_flg:
-                            temp_moves[tracked_move+rotate_moves+"m"*(i-x_col)]=[x_positions,9999999]
-                    
-                    
-
-                    # Try moving piece down:
-                    for temp_move in temp_moves:
-                        x_positions=temp_moves[temp_move][0].copy()
-                        next_temp_board=temp_board.copy()
-
-                        for i in range(len(next_temp_board)):
-                        # print("I love EAI class because of the ----",i)
-                            val=0
-                            flag=0
-                            val= sum([1 for j in x_positions if  next_temp_board[j[0]][j[1]]=="x"])
-
-                            if val>0:      
-                                for i in range( len(x_positions)):
-                                    x_positions[i][0]=x_positions[i][0]-1
-                                break
-
-                            else:
-                                for i  in range(len( x_positions)):
-                                    row_index=[i[0]   for i in x_positions]
-                                    if max(row_index)<24:
-                                        x_positions[i][0]=x_positions[i][0]+1
-                                    else:
-                                        flag=1
-                            if flag==1:
-                                break                    
-                        # print(x_positions)
-                        # print("Board before assignment")
-                        # for i in temp_board:
-                        #     print(i+"|||||")
-                        for i in x_positions:
-                            next_temp_board[i[0]]= next_temp_board[i[0]][0:i[1]]+"x"+next_temp_board[i[0]][i[1]+1:]
-                        # print("Board after assignment")
-                        # for i in temp_board:
-                        #     print(i+"|||||")
-
-        ##############################################################################################################
-
-                        board_val_by_evaluation_function=self.evaluation_function(next_temp_board,"Weighted_row_coverage")
-                        temp_moves[temp_move][1]=board_val_by_evaluation_function
-                        # print("The value given by the evaluation function is ", board_val_by_evaluation_function)
-        
-        pos_moves=[x for x in temp_moves]
-        eval_moves=[temp_moves[x][1]  for x in temp_moves]
-        return pos_moves[eval_moves.index(min(eval_moves))].split("-_-")[0]
-
+        pos_moves=[x for x in moves]
+        eval_moves=[moves[x][1]  for x in moves]
+        return pos_moves[eval_moves.index(min(eval_moves))]
         # return "bd"+str(self.evaluation_function(quintris.get_board(),"N_of_empty_blocks"))
 
     # This is the version that's used by the animted version. This is really similar to get_moves,
@@ -363,7 +398,7 @@ class ComputerPlayer:
     #   - quintris.left(), quintris.right(), quintris.down(), and quintris.rotate() can be called to actually
     #     issue game commands
     #   - quintris.get_board() returns the current state of the board, as a list of strings.
-    #
+    #what
     def control_game(self, quintris):
         # another super simple algorithm: just move piece to the least-full column
         while 1:
