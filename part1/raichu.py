@@ -543,7 +543,7 @@ def pi_pik_travel(board, player):
         return 0
 
 def evaluation_func(board, player, opp_player):
-    weights = [7, 2, 1]
+    weights = [7, 5, 1]
     features = np.array([weighted_pieces(board, player),
                         jump_moves_avail(board, player)-jump_moves_avail(board, opp_player),
                         pi_pik_travel(board, player)-pi_pik_travel(board,opp_player)])
