@@ -207,7 +207,7 @@ class ComputerPlayer:
         piece_copy=piece[0]
         rotated_90 = [ "".join([ str[i] for str in piece_copy[::-1] ]) for i in range(0, len(piece_copy[0])) ]
         rotated_pieces= { 0: ["",piece_copy], 90: ["n",rotated_90], 180: ["nn", [ str[::-1] for str in piece_copy[::-1] ]], 270: ["nnn",[ str[::-1] for str in rotated_90[::-1] ]] }
-
+        print("-----------------------------", rotated_pieces)
         
         n_row=len(board)
         n_col=len(board[0])
@@ -281,7 +281,7 @@ class ComputerPlayer:
                 piece_copy=next_piece.copy()
                 rotated_90 = [ "".join([ str[i] for str in piece_copy[::-1] ]) for i in range(0, len(piece_copy[0])) ]
                 rotated_pieces= { 0: ["",piece_copy], 90: ["n",rotated_90], 180: ["nn", [ str[::-1] for str in piece_copy[::-1] ]], 270: ["nnn",[ str[::-1] for str in rotated_90[::-1] ]] }
-
+                
                 
                 n_row=len(temp_board)
                 n_col=len(temp_board[0])
@@ -414,6 +414,3 @@ try:
 
 except EndOfGame as s:
     print("\n\n\n", s)
-
-
-

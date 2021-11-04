@@ -9,10 +9,10 @@
 
 
 <style type="text/css">
-    pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+    pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14336,7 +14336,7 @@ raichu moves</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">printable_board</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">board_to_string</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">N</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">board</span><span class="p">),</span> <span class="n">N</span><span class="p">))</span>
 </pre></div>
 
@@ -14351,7 +14351,7 @@ raichu moves</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">printable_board</span><span class="p">(</span><span class="n">initial_board</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">board_to_string</span><span class="p">(</span><span class="n">initial_board</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14417,134 +14417,30 @@ b.b.b.b.
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="n">board_to_grid</span><span class="p">(</span><span class="n">initial_board</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-<span class="n">board</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_board</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">test_board</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;w&#39;</span>
-<span class="n">test_board</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
-<span class="n">test_board</span><span class="p">[(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;w&#39;</span>
-<span class="n">board</span> <span class="o">=</span> <span class="n">test_board</span>
-<span class="n">board</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#select player</span>
-<span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
-
-<span class="c1">#set player variables</span>
-<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
-    <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
-    <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
-
-<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
-    <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
-    <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
-    <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">possible_pichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">possible_pichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
     <span class="n">pichu_boards</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+    <span class="n">all_player_moves</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">num_jump_moves</span> <span class="o">=</span> <span class="mi">0</span>
+
+    
+    <span class="c1">#set player variables</span>
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
+        <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
+
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
+        <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
 
     <span class="c1">#find player pichus</span>
     <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">board</span> <span class="o">==</span> <span class="n">pichu</span> <span class="p">)</span>
@@ -14603,200 +14499,10 @@ b.b.b.b.
                         <span class="n">new_board</span><span class="p">[</span><span class="n">pichu_jump</span><span class="p">]</span><span class="o">=</span><span class="n">pichu</span>
 
                     <span class="n">pichu_boards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_board</span><span class="p">)</span>
+                    <span class="n">num_jump_moves</span> <span class="o">+=</span> <span class="mi">1</span>
     
 
-    <span class="k">return</span> <span class="n">pichu_boards</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">possible_pichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">)))</span>
-<span class="n">possible_pichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>9
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[array([[&#39;.&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;$&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)]</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#select player</span>
-<span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
-
-<span class="c1">#set player variables</span>
-<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
-    <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
-    <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
-
-<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
-    <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
-    <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
-    <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
+    <span class="k">return</span> <span class="n">pichu_boards</span><span class="p">,</span> <span class="n">num_jump_moves</span>
 </pre></div>
 
      </div>
@@ -14807,11 +14513,28 @@ b.b.b.b.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">possible_pikachu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">possible_pikachu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
     <span class="n">pikachu_boards</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+    <span class="n">all_player_moves</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">num_jump_moves</span> <span class="o">=</span> <span class="mi">0</span>
+
+    
+    <span class="c1">#set player variables</span>
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
+        <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
+
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
+        <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
     
     <span class="c1">#find player pikachus</span>
     <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">board</span> <span class="o">==</span> <span class="n">pikachu</span><span class="p">)</span>
@@ -14895,6 +14618,7 @@ b.b.b.b.
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">new_board</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span><span class="n">pikachu</span>
                     <span class="n">pikachu_boards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_board</span><span class="p">)</span>
+                    <span class="n">num_jump_moves</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
 
@@ -14910,6 +14634,7 @@ b.b.b.b.
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">new_board</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span><span class="o">=</span><span class="n">pikachu</span>
                     <span class="n">pikachu_boards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_board</span><span class="p">)</span>
+                    <span class="n">num_jump_moves</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
 
@@ -14925,10 +14650,11 @@ b.b.b.b.
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">new_board</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span><span class="o">=</span><span class="n">pikachu</span>
                     <span class="n">pikachu_boards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_board</span><span class="p">)</span>
+                    <span class="n">num_jump_moves</span> <span class="o">+=</span><span class="mi">1</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
 
-    <span class="k">return</span> <span class="n">pikachu_boards</span>
+    <span class="k">return</span> <span class="n">pikachu_boards</span><span class="p">,</span> <span class="n">num_jump_moves</span>
         
 </pre></div>
 
@@ -14937,243 +14663,30 @@ b.b.b.b.
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">possible_pikachu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">)))</span>
-<span class="n">possible_pikachu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>17
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;W&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;.&#39;, &#39;W&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;W&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;W&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;b&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;.&#39;, &#39;W&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)]</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">possible_raichu_boards</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">possible_raichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
     <span class="n">raichu_boards</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+    <span class="n">all_player_moves</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">num_jump_moves</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#set player variables</span>
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
+        <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
+
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
+        <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
     
     <span class="c1">#find player raichus</span>
     <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">board</span> <span class="o">==</span> <span class="n">raichu</span><span class="p">)</span>
@@ -15255,11 +14768,12 @@ b.b.b.b.
                                     <span class="n">new_board</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="n">first_opp</span><span class="p">]]</span><span class="o">=</span><span class="s1">&#39;.&#39;</span>
                                     <span class="n">new_board</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="n">first_opp</span><span class="o">+</span><span class="n">n</span><span class="p">]]</span><span class="o">=</span><span class="n">raichu</span>
                                     <span class="n">raichu_boards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_board</span><span class="p">)</span>
+                                    <span class="n">num_jump_moves</span> <span class="o">+=</span> <span class="mi">1</span>
                                 <span class="k">else</span><span class="p">:</span>
                                     <span class="k">break</span>
                         <span class="k">break</span>
                 
-    <span class="k">return</span> <span class="n">raichu_boards</span>
+    <span class="k">return</span> <span class="n">raichu_boards</span><span class="p">,</span> <span class="n">num_jump_moves</span>
 </pre></div>
 
      </div>
@@ -15270,373 +14784,103 @@ b.b.b.b.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#select player</span>
-<span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
-
-<span class="c1">#set player variables</span>
-<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
-    <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
-    <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
-
-<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
-    <span class="n">forward</span><span class="p">,</span> <span class="n">backward</span><span class="p">,</span> <span class="n">last_row</span>  <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
-    <span class="n">pichu</span><span class="p">,</span> <span class="n">pikachu</span><span class="p">,</span> <span class="n">raichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span>
-    <span class="n">opp_pichu</span><span class="p">,</span> <span class="n">opp_pikachu</span><span class="p">,</span> <span class="n">opp_raichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">successors</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+    
+    <span class="n">all_player_moves</span> <span class="o">=</span> <span class="p">[]</span>
+       
+    <span class="n">all_player_moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possible_pichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">all_player_moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possible_pikachu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">all_player_moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possible_raichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">all_player_moves</span> <span class="o">=</span> <span class="p">[</span><span class="n">board</span> <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">all_player_moves</span> <span class="k">for</span> <span class="n">board</span> <span class="ow">in</span> <span class="n">piece</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">all_player_moves</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;@&#39;</span>
-<span class="n">board</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;@&#39;</span>
-<span class="n">board</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;$&#39;</span>
-<span class="n">board</span><span class="p">[(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;$&#39;</span>
-<span class="n">board</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-       [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-       [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">possible_raichu_boards</span><span class="p">(</span><span class="n">board</span><span class="p">)))</span>
-<span class="n">possible_raichu_boards</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>24
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[array([[&#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;@&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;@&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;@&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;@&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;@&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;@&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;@&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;@&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;@&#39;, &#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;@&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;),
- array([[&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;W&#39;, &#39;@&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;, &#39;W&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;$&#39;, &#39;.&#39;, &#39;w&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;$&#39;],
-        [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
-        [&#39;b&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
-        [&#39;.&#39;, &#39;B&#39;, &#39;w&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;B&#39;],
-        [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)]</pre>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if terminal state</span>
-<span class="k">def</span> <span class="nf">is_terminal_state</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tree_1_2</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
 
-    <span class="n">min_pieces</span> <span class="o">=</span> <span class="s1">&#39;bB$&#39;</span>  
-    <span class="n">max_pieces</span><span class="o">=</span><span class="s1">&#39;wW@&#39;</span>
+    <span class="c1"># set players</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">opp_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span><span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">opp_player</span> <span class="o">=</span><span class="s1">&#39;w&#39;</span>
+
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># (depth, nodes by parent)</span>
+    <span class="n">tree_meta</span> <span class="o">=</span><span class="p">[]</span> <span class="c1">#(depth, max_node?)</span>
+
+    <span class="c1"># place initial_board at root node </span>
+    <span class="c1">#(board, depth, parent_idx)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_node</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">tree_meta</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">max_node</span><span class="p">))</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="n">board</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)]])</span>
+
+
+    <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">max_node</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1">#whose turn is it?</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">who_moves</span> <span class="o">=</span> <span class="n">player</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">who_moves</span> <span class="o">=</span> <span class="n">opp_player</span>
+
+    <span class="c1">#add successors to tree</span>
+    <span class="n">parent_boards</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">d_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">parent_board</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parent_boards</span><span class="p">):</span>
+        <span class="n">d_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="n">succ</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">succ</span> <span class="ow">in</span> <span class="n">successors</span><span class="p">(</span><span class="n">parent_board</span><span class="p">,</span> <span class="n">who_moves</span><span class="p">)])</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_nodes</span><span class="p">)</span>
+    <span class="n">tree_meta</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">,</span><span class="n">max_node</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">d_nodes</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">tree</span><span class="p">,</span> <span class="n">tree_meta</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">is_terminal_state</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+    <span class="c1"># count number of pieces each player had on the board</span>
+    
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">max_player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+        <span class="n">min_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+    
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">max_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+        <span class="n">min_plyaer</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+    
+    <span class="k">if</span> <span class="n">max_player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">max_pieces</span><span class="o">=</span><span class="s1">&#39;wW@&#39;</span>
+        <span class="n">min_pieces</span> <span class="o">=</span> <span class="s1">&#39;bB$&#39;</span>
+    
+    <span class="k">if</span> <span class="n">max_player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">max_pieces</span> <span class="o">=</span> <span class="s1">&#39;bB$&#39;</span>
+        <span class="n">min_pieces</span> <span class="o">=</span> <span class="s1">&#39;wW@&#39;</span>
+    
 
     <span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">return_counts</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">pieces_on_board</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
@@ -15662,13 +14906,209 @@ b.b.b.b.
 </div>
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">win_in_avail_moves</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+<span class="c1">#check leaf nodes for terminal states</span>
+
+    <span class="n">player_wins</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">leaf_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">leaf_idx</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+            <span class="n">check_terminal</span> <span class="o">=</span> <span class="n">is_terminal_state</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">check_terminal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check_terminal</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">win_board</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">leaf_idx</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">win_board</span><span class="p">])</span>
+    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+    
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_to_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">d</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">max_node</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">alpha_beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
+        <span class="n">who_moves</span> <span class="o">=</span> <span class="n">opp_player</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">max_node</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">alpha_beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="n">who_moves</span> <span class="o">=</span> <span class="n">player</span>
+
+    <span class="n">d_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">board</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">group</span><span class="p">]):</span>
+            <span class="n">d_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="n">succ</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha_beta</span><span class="p">]</span><span class="k">for</span> <span class="n">succ</span> <span class="ow">in</span> <span class="n">successors</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">who_moves</span><span class="p">)])</span>
+    <span class="n">tree</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_nodes</span><span class="p">)</span>
+
+    <span class="n">tree_meta</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">max_node</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">d_nodes</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">tree</span><span class="p">,</span> <span class="n">tree_meta</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">weighted_pieces</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">max_player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+        <span class="n">min_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">max_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+        <span class="n">min_player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+
+    <span class="k">if</span> <span class="n">max_player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">max_pieces</span><span class="o">=</span><span class="s1">&#39;wW@&#39;</span>
+        <span class="n">min_pieces</span> <span class="o">=</span> <span class="s1">&#39;bB$&#39;</span>
+
+    <span class="k">if</span> <span class="n">max_player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">max_pieces</span> <span class="o">=</span> <span class="s1">&#39;bB$&#39;</span>
+        <span class="n">min_pieces</span> <span class="o">=</span> <span class="s1">&#39;wW@&#39;</span>
+
+
+    <span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">return_counts</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">pieces_on_board</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+    
+    <span class="n">max_weighted_pieces</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">piece</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">max_pieces</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">max_weighted_pieces</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">pieces_on_board</span><span class="p">[</span><span class="n">piece</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="n">min_weighted_pieces</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">piece</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">min_pieces</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">min_weighted_pieces</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">pieces_on_board</span><span class="p">[</span><span class="n">piece</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="k">return</span> <span class="n">max_weighted_pieces</span><span class="o">-</span><span class="n">min_weighted_pieces</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">jump_moves_avail</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+    
+    <span class="n">jump_moves</span> <span class="o">=</span> <span class="p">[]</span>
+       
+    <span class="n">jump_moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possible_pichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">jump_moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possible_pikachu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">jump_moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">possible_raichu_moves</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">jump_moves</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pi_pik_travel</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+        <span class="n">pichu</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+        <span class="n">pikachu</span> <span class="o">=</span> <span class="s1">&#39;W&#39;</span>
+
+    <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+        <span class="n">pichu</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+        <span class="n">pikachu</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span>
+
+    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(((</span><span class="n">board</span> <span class="o">==</span> <span class="n">pichu</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">board</span> <span class="o">==</span> <span class="n">pikachu</span><span class="p">)))</span>
+    <span class="n">row</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span>
+            <span class="n">squared_dist</span> <span class="o">=</span> <span class="p">[(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+            <span class="n">squared_dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">squared_dist</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evaluation_func</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">):</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">weighted_pieces</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">),</span>
+                        <span class="n">jump_moves_avail</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span><span class="o">-</span><span class="n">jump_moves_avail</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">),</span>
+                        <span class="n">pi_pik_travel</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span><span class="o">-</span><span class="n">pi_pik_travel</span><span class="p">(</span><span class="n">board</span><span class="p">,</span><span class="n">opp_player</span><span class="p">)])</span>
+    
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">features</span><span class="o">*</span><span class="n">weights</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_terminal_state</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;B&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;@&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;w&#39;</span>
+<span class="n">board</span>
 </pre></div>
 
      </div>
@@ -15684,13 +15124,20 @@ b.b.b.b.
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>(False, 10, 11)</pre>
+<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;w&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
 </div>
 
 </div>
@@ -15699,13 +15146,21 @@ b.b.b.b.
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># find leaves at horizon</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;@&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;@&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;.&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;.&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;.&#39;</span>
+<span class="n">board</span><span class="p">[(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;.&#39;</span>
+<span class="n">board</span>
 </pre></div>
 
      </div>
@@ -15713,13 +15168,112 @@ b.b.b.b.
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>array([[&#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;B&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;@&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;b&#39;, &#39;.&#39;],
+       [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;.&#39;]], dtype=&#39;&lt;U1&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># evaluation function</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="n">board</span>
+<span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># set players</span>
+<span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+<span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+    <span class="n">opp_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+<span class="k">if</span> <span class="n">player</span> <span class="o">==</span><span class="s1">&#39;b&#39;</span><span class="p">:</span>
+    <span class="n">opp_player</span> <span class="o">=</span><span class="s1">&#39;w&#39;</span>
+
+<span class="c1"># first two layers of tree</span>
+<span class="n">tree</span><span class="p">,</span> <span class="n">tree_meta</span> <span class="o">=</span> <span class="n">tree_1_2</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span>
+
+<span class="c1"># check if there is a winning move availalbe</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">win_in_avail_moves</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="n">choice_str</span> <span class="o">=</span> <span class="n">win</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># print(&#39;for the win&#39;)</span>
+    <span class="c1"># print(choice_str)</span>
+    
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no winning moves, but here is the best choice for now&#39;</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="p">]):</span>
+        <span class="n">group_max</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">evaluation_func</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">group_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">group_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">group_max</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">group_max</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">choice_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">choice</span><span class="o">.</span><span class="n">flatten</span><span class="p">()])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">choice_str</span><span class="p">)</span>
+
+    <span class="c1">#if no winning moves are available, build the game tree to horizon</span>
+    <span class="c1"># current depth of tree (root is 0)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;current tree </span><span class="si">{</span><span class="n">tree_meta</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1">#depth of next layer of tree (root is 0)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+    <span class="c1"># number of levels to add to tree</span>
+    <span class="n">horizon</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
+        <span class="n">add_to_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">d</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">),</span> <span class="n">tree_meta</span><span class="p">)</span>
+    
+
+    <span class="c1">#minimize</span>
+    <span class="c1"># calculate evaluation function for each leaf nodes</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">evaluations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="p">]):</span>
+        <span class="n">group_min</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">evaluation_func</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">group_min</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">group_min</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">evaluations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_min</span><span class="p">)</span>
+
+    <span class="c1"># find index of max of min values</span>
+    <span class="n">max_of_mins</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">evaluations</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">evaluations</span><span class="p">]))</span>
+
+    <span class="c1">#board for max of mins</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">max_of_mins</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">choice_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">choice</span><span class="o">.</span><span class="n">flatten</span><span class="p">()])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">choice_str</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15727,62 +15281,113 @@ b.b.b.b.
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># max function</span>
-</pre></div>
+<div class="jp-Cell-outputWrapper">
 
-     </div>
-</div>
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>no winning moves, but here is the best choice for now
+..@...........@...B..b.........b....@.................b.........
+current tree [(0, True), (1, False, 1)]
+3 [(0, True), (1, False, 1), (2, True, 58)]
+.........@...........b.........b....@.....@...........b.........
+</pre>
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># min function</span>
-</pre></div>
+</div>
 
-     </div>
-</div>
-</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># minimax function</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###  given (N, player (w or b), board, timelimit (sec)) return the next best move for the player</span>
 <span class="k">def</span> <span class="nf">find_best_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">timelimit</span><span class="p">):</span>
-    <span class="c1"># This sample code just returns the same board over and over again (which</span>
-    <span class="c1"># isn&#39;t a valid move anyway.) Replace this with your code!</span>
-    <span class="c1">#</span>
+    <span class="n">choice_str</span> <span class="o">=</span> <span class="n">board</span>
+
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">yield</span> <span class="n">board</span>
+        <span class="k">yield</span> <span class="n">choice_str</span>
+
+        <span class="c1"># set players</span>
+        <span class="n">player</span> <span class="o">=</span> <span class="n">player</span>
+        <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+            <span class="n">opp_player</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+        <span class="k">if</span> <span class="n">player</span> <span class="o">==</span><span class="s1">&#39;b&#39;</span><span class="p">:</span>
+            <span class="n">opp_player</span> <span class="o">=</span><span class="s1">&#39;w&#39;</span>
+        
+        <span class="n">board</span> <span class="o">=</span> <span class="n">board_to_grid</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+        <span class="c1"># first two layers of tree</span>
+        <span class="n">tree</span><span class="p">,</span> <span class="n">tree_meta</span> <span class="o">=</span> <span class="n">tree_1_2</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span>
+
+        <span class="c1"># check if there is a winning move availalbe</span>
+        <span class="n">win</span> <span class="o">=</span> <span class="n">win_in_avail_moves</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">win</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">choice_str</span> <span class="o">=</span> <span class="n">win</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># print(&#39;for the win&#39;)</span>
+            <span class="c1"># print(choice_str)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># print(&#39;no winning moves, but here is the best choice for now&#39;)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="p">]):</span>
+                <span class="n">group_max</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+                    <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">evaluation_func</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">group_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="n">group_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+
+            <span class="n">choice</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">group_max</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">group_max</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">choice_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">choice</span><span class="o">.</span><span class="n">flatten</span><span class="p">()])</span>
+            <span class="c1"># print(choice_str)</span>
+
+            <span class="c1">#if no winning moves are available, build the game tree to horizon</span>
+            <span class="c1"># current depth of tree (root is 0)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="c1"># print(f&#39;current tree {tree_meta}&#39;)</span>
+
+            <span class="c1">#depth of next layer of tree (root is 0)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+            <span class="c1"># number of levels to add to tree</span>
+            <span class="n">horizon</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
+                <span class="n">add_to_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">d</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">)</span>
+                <span class="n">d</span><span class="o">+=</span><span class="mi">1</span>
+                <span class="c1"># print(len(tree), tree_meta)</span>
+            
+
+            <span class="c1">#minimize</span>
+            <span class="c1"># calculate evaluation function for each leaf nodes</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="n">evaluations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">d</span><span class="p">]):</span>
+                <span class="n">group_min</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+                    <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">evaluation_func</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player</span><span class="p">,</span> <span class="n">opp_player</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">group_min</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="n">group_min</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">evaluations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_min</span><span class="p">)</span>
+
+            <span class="c1"># find index of max of min values</span>
+            <span class="n">max_of_mins</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">evaluations</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">evaluations</span><span class="p">]))</span>
+
+            <span class="c1">#board for max of mins</span>
+            <span class="n">choice</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">max_of_mins</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">choice_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">choice</span><span class="o">.</span><span class="n">flatten</span><span class="p">()])</span>
+            <span class="c1"># print(choice_str)</span>
 </pre></div>
 
      </div>
@@ -15793,13 +15398,13 @@ b.b.b.b.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="n">initial_board</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">player</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span>
-<span class="n">timelimit</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">timelimit</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 
      </div>
@@ -15810,7 +15415,7 @@ b.b.b.b.
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -15860,17 +15465,14 @@ b.b.b.b.
 ........
 Here&#39;s what I decided:
 ........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
-........W.W.W.W..w.w.w.w................b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
+..........W.W.W..w.w.w.wW...............b.b.b.b..B.B.B.B........
 </pre>
 </div>
 </div>
@@ -15883,26 +15485,41 @@ Here&#39;s what I decided:
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-36-b90bdb7b25a9&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">     14</span>     print<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#34;Searching for best move for &#34;</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span> player <span class="ansi-yellow-intense-fg ansi-bold">+</span> <span class="ansi-blue-intense-fg ansi-bold">&#34; from board state: \n&#34;</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span> board_to_string<span class="ansi-yellow-intense-fg ansi-bold">(</span>board<span class="ansi-yellow-intense-fg ansi-bold">,</span> N<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">     15</span>     print<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#34;Here&#39;s what I decided:&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-intense-fg ansi-bold">---&gt; 16</span><span class="ansi-yellow-intense-fg ansi-bold">     </span><span class="ansi-green-intense-fg ansi-bold">for</span> new_board <span class="ansi-green-intense-fg ansi-bold">in</span> find_best_move<span class="ansi-yellow-intense-fg ansi-bold">(</span>board<span class="ansi-yellow-intense-fg ansi-bold">,</span> N<span class="ansi-yellow-intense-fg ansi-bold">,</span> player<span class="ansi-yellow-intense-fg ansi-bold">,</span> timelimit<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">     17</span>         print<span class="ansi-yellow-intense-fg ansi-bold">(</span>new_board<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-27-b90bdb7b25a9&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span>     print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Searching for best move for &#34;</span> <span class="ansi-blue-fg">+</span> player <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">&#34; from board state: \n&#34;</span> <span class="ansi-blue-fg">+</span> board_to_string<span class="ansi-blue-fg">(</span>board<span class="ansi-blue-fg">,</span> N<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span>     print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Here&#39;s what I decided:&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">for</span> new_board <span class="ansi-green-fg">in</span> find_best_move<span class="ansi-blue-fg">(</span>board<span class="ansi-blue-fg">,</span> N<span class="ansi-blue-fg">,</span> player<span class="ansi-blue-fg">,</span> timelimit<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     17</span>         print<span class="ansi-blue-fg">(</span>new_board<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-34-c5d9a8955b93&gt;</span> in <span class="ansi-cyan-fg">find_best_move</span><span class="ansi-blue-intense-fg ansi-bold">(board, N, player, timelimit)</span>
-<span class="ansi-green-fg">      4</span>     <span class="ansi-red-intense-fg ansi-bold">#</span>
-<span class="ansi-green-fg">      5</span>     <span class="ansi-green-intense-fg ansi-bold">while</span> <span class="ansi-green-intense-fg ansi-bold">True</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 6</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>time<span class="ansi-yellow-intense-fg ansi-bold">.</span>sleep<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">      7</span>         <span class="ansi-green-intense-fg ansi-bold">yield</span> board
+<span class="ansi-green-fg">&lt;ipython-input-25-613edb956e47&gt;</span> in <span class="ansi-cyan-fg">find_best_move</span><span class="ansi-blue-fg">(board, N, player, timelimit)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg">         </span>time<span class="ansi-blue-fg">.</span>sleep<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span>         <span class="ansi-green-fg">yield</span> choice_str
+<span class="ansi-green-intense-fg ansi-bold">      8</span> 
 
-<span class="ansi-red-intense-fg ansi-bold">KeyboardInterrupt</span>: </pre>
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
 </div>
 </div>
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>
