@@ -33,31 +33,30 @@ def load_file(filename):
 # Do not change the return type or parameters of this function!
 #
 def classifier(train_data, test_data):
-    # This is just dummy code -- put yours here!
-    truthful_dict={}
-    deceptive_dict={}
-    truthful_count=0
-    deceptive_count=0
+    # This is just dummy code -- put yours here! - added my code below
+    truthful_dict={} #dictionary to store count of all unique words of objects under truthful label
+    deceptive_dict={} #dictionary to store count of all unique words of objects under deceptive label
+    truthful_count=0 #to maintain total number of words under truthful label
+    deceptive_count=0 #to maintain total number of words under deceptive label
     for index,sentence in enumerate(train_data["objects"]):
         if train_data["labels"][index] == "truthful" :
-            words=sentence.split(" ")
-            for word in words:
+            words=sentence.split(" ") #get all words in sentence
+            for word in words: 
                 truthful_count=truthful_count+1
                 if word in truthful_dict.keys() :
-                    truthful_dict[word]+=1
+                    truthful_dict[word]+=1 #update into dictionary
                 else:
-                    truthful_dict[word]=1
-        elif train_data["labels"][index] == "deceptive" :
+                    truthful_dict[word]=1 #word is seen for first time, create new key and then update dictionary
+        elif train_data["labels"][index] == "deceptive" : #same for this label
             words=sentence.split(" ")
             for word in words:
                 deceptive_count= deceptive_count+1
                 if word in deceptive_dict.keys() :
                     deceptive_dict[word]+=1
                 else:
-                    deceptive_dict[word]=1
-        print(truthful_count,deceptive_count)
+                    deceptive_dict[word]=1 
     for each in truthful_dict:
-        truthful_dict[each]=(truthful_dict[each]/truthful_count)
+        truthful_dict[each]=(truthful_dict[each]/truthful_count) #calculating probability = (number of occurences of one word / total number of words)
     for each in deceptive_dict:
         deceptive_dict[each]=deceptive_dict[each]/deceptive_count
         
@@ -69,22 +68,20 @@ def classifier(train_data, test_data):
     for sentence in test_data["objects"]:
         words=sentence.split(" ")
         for word in words:                 
-            if word in truthful_dict.keys():
-                truth_prob=(truth_prob)-math.log(truthful_dict[word])
+            if word in truthful_dict.keys(): #used negative log to avoid the value from becoming too small to track
+                truth_prob=(truth_prob)-math.log(truthful_dict[word]) #multiplying all stored parameters according to every word in the sentence
             else:
-                truth_prob+=-math.log(1/truthful_count)
+                truth_prob+=-math.log(1/truthful_count) #if it is a word never seen before then we are multiplying with its probability as (1/total number of words)
             if word in deceptive_dict.keys():
                 decep_prob=(decep_prob)-math.log(deceptive_dict[word] )
             else:
                 decep_prob+=-math.log(1/deceptive_count)
 
-        if truth_prob<=decep_prob:
+        if truth_prob<=decep_prob: #classifying based on which has higher probability
             test_labels.append("truthful")
         else:
             test_labels.append("deceptive")
 
-   
-    print(test_labels)
     return test_labels
 
 
