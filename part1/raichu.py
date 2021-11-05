@@ -547,7 +547,7 @@ def evaluation_func(board, player, opp_player):
     
     unique, counts = np.unique(board, return_counts = True)
     if raichu in unique:
-        weights = [15,8,1]
+        weights = [15,2,1]
     else:
         weights = [7, 2, 5]
     
@@ -629,6 +629,8 @@ def find_best_move(board, N, player, timelimit):
             #board for max of mins
             choice = tree[1][0][max_of_mins][0]
             choice_str = ''.join([str(x) for x in choice.flatten()])
+            print (choice_str)
+            return choice_str
 
 
 
