@@ -8,9 +8,7 @@ from kbinput import *
 import time, sys
 import copy 
 
-#Global Variable to check the initial iteration
-global best_move
-best_move=""
+
 
 class HumanPlayer:
     def get_moves(self, quintris):
@@ -28,10 +26,6 @@ class HumanPlayer:
 # This is the part you'll want to modify!
 # Replace our super simple algorithm with something better
 
-class store_move:
-    def next_move(self):
-        self.next_move=""
-#
 class ComputerPlayer:
        
     # This function should generate a series of commands to move the piece into the "optimal"
@@ -44,63 +38,35 @@ class ComputerPlayer:
     #     issue game commands
     #   - quintris.get_board() returns the current state of the board, as a list of strings.
     #
+
+    # The following function returns the values for the get moves 
+
     def get_moves(self, quintris):
-        # super simple current algorithm: just randomly move left, right, and rotate a few times
-#        print("*********************************This is where the code understanding snippet runs**************************************")
- #       print("The column of the the upper left block is ",quintris.col)
-  #      print("The row of the upper left block is ",quintris.row)
-   #     print("The current piece is ", quintris.get_piece())
-
-
-        ### The following code will not work beacuse of the inplace operations
-        # current_board= quintris.get_board() #### Store these values in current_board identifier as the operation we perfom here are in place operations
-        # current_score= 0
-        # current_piece= quintris.get_piece()
-        # next_piece= quintris.get_next_piece()
-        # print("The current board is the following :")
-        # for i in current_board:
-        #     print( i) 
-        # print("The current score of the board is ",current_score)
-        # moves_and_evaluation=self.successor_boards(quintris.get_piece(),current_board)
-        # quintris.state=(current_board,current_score)
-        # print("The board after I reassign it back again")
-        # new_board=quintris.get_board()
-        # for i in new_board:
-        #     print( i)
-        # new_current_piece= quintris.get_piece()
-        # new_next_piece= quintris.get_next_piece()
-         
-         # Check whether the previus board and the new assigned board are equal or not
-        # print("The value of equality for boards is ",current_board==new_board)
-        # print("The value of equality for curret pieces", current_piece==new_current_piece)
-        # print("The value of equality for next pieces", next_piece== new_next_piece)
-         #   print("The value given by the evaluation function is ",self.evaluation_function(quintris.get_board(),"N_of_empty_blocks"))
-      #  print("The next piece is ",quintris.get_next_piece())
-       # board_for_print=quintris.get_board()
-        #for i in board_for_print:
-         #   print(i)
-       # print(len(quintris.get_board()),"X", len(quintris.get_board()[0]))
-       # print("***********************************This is where the code understanding snippets ends************************************")
+        #Call the successor function to get the best moves
         moves_current= self.successor_boards()
-        print("############################################3",moves_current)
         return moves_current
         
-
+    # The following function will return the value for the utility of the evaluated value for the given board and based on the utility function
     def evaluation_function(self,board,type_val):
-
+        
+        #No.of empty blocks:
         if type_val=="N_of_empty_blocks":
             return 25*15-sum([1 for i in board for a in i if a=="x"])
 
+        # Weighted row coverage. Will try to fill the rows at the bottom first 
         elif type_val=="Weighted_row_coverage":
             val=0 
             for i in range(len(board)):
                 val= val+ (25-i)* (sum([1 for i in board[i] if i=="x"])) 
+                
             return val
 
+        #Weighted_row_coverage_and_lessgaps : Will try to fill the bottom rows first and with less gaps
         elif type_val=="Weighted_row_coverage_and_lessgaps":
             val=0 
             for i in range(len(board)):
                 val= val+ (25-i)* (sum([1 for i in board[i] if i=="x"])) 
+                # val= val+ (25-i) *(sum([-1 for i in range(0,len(board[i])-1) if board[i]==board[i+1]]))
 
             gaps=0
             empties=[]
@@ -141,10 +107,11 @@ class ComputerPlayer:
                 if x_count==15:
                     line_filled+=1
                 
-            return val+gaps*10#- 10000*line_filled + 1000*gaps
+            return val-100*line_filled #+ 1000*gaps
 
             # +height+column_gap-10000*line_filled+val
 
+        #Gaps: Will try to get a a board that has lowest number of gaps
 
         elif type_val=="less_gaps":
             gaps=0  
@@ -160,7 +127,8 @@ class ComputerPlayer:
                         board[each[0]-1][each[1]]=="x"
                         gaps+=1
             return gaps 
-
+        #Heights: Will return the aggregate sum of all heights of all the columns in the board
+         
         elif type_val=="heights":
             height=0
             i=0
@@ -184,29 +152,33 @@ class ComputerPlayer:
             column_gap= sum([abs(height[i+1] - height[i]) for  i in range(len(height))-1])
             return height
 
-
-    def get_x_positions(self, piece, val_col):
-        if piece[0][0][0]=="x":
-            val_col=val_col+0
-        elif piece[0][0][1]=="x":
-            val_col=val_col-1
-        elif piece[0][0][2]=="x":
-            val_col=val_col-2
-        else:
-            val_col=val_col-3
-        x_positions=[[i,j+val_col] for i in range(len(piece[0])) for j in range(len(piece[0][0])) if piece[0][i][j]=="x"]
-        return x_positions
-
-    def legal_positions(self,x_positions,n_row,n_col):
-         return sum([1 for x in x_positions if x[0]>=0 and x[0]<n_row and x[1]>=0 and x[1]<n_col]) == 5
-
-        
+    # The successor function will create all possible boards for the the given current piece and 
+    # and the next piece.
+    # In the worst case scenario, the branching factor is 120 fo a a depth of one. Since we are 
+    # reaching a depth of two, the number of boards that are generated are 14,400 boards 
     def successor_boards(self):
 
+        #Creating a list that has all possible position of the given piece
+        #0 degree roated - Unflipped
+        #0 degree roated - Horizontal flipped
+        #90 degree roated - Unflipped
+        #90 degree roated - Horizontal flipped
+        #180 degree roated - Unflipped
+        #180 degree roated - Horizontal flipped
+        #270 degree roated - Unflipped
+        #270 degree roated - Horizontal flipped
+
+        # Once we get all combination of pieces after rotating and flipping,
+        # we will then move the piece in the given board towards its left and right all the way upto the end of the board
+        # and pull it down. 
         rotation=["0_N","0_H","90_N","90_H","180_N","180_H","270_N","270_H"]
         move_tracker={}
+        # visited_boards=[]
         for rotate_angle in rotation:
+            #Creating a copy of the board object so that we can use the methods of rotate and flip from backend codes provided by the Professor and without changing the original board
             quintris_game=copy.deepcopy(quintris)
+
+            # For each possible position( by rotating and flipping) capture the relevant instructions in the rotate_move 
             if rotate_angle=="0_N":
                 rotate_move=""
 
@@ -248,8 +220,9 @@ class ComputerPlayer:
                 quintris_game.rotate()
                 quintris_game.rotate()
                 quintris_game.rotate()
-            # Move pieces to the left 
-            for left in range(0,quintris_game.get_piece()[2]):
+
+            # Move pieces to the left (from the given position to the end of the board)
+            for left in range(0,quintris_game.get_piece()[2]+1):
                 quintris_game_copy= copy.deepcopy(quintris_game)
                 temp_board=quintris_game_copy.get_board()
                 
@@ -260,6 +233,7 @@ class ComputerPlayer:
                     left_tracker.append("b")
                 quintris_game_copy.down()
 
+                # For each of the pieces repeat the process that we have earlier get the board at a depth of two
                 
                 #--------------Start: Look Ahead 2nd piece for boards with left moved pieces-----
                 rotate_move_next_left=rotate_move+"b"*len(left_tracker)
@@ -309,27 +283,31 @@ class ComputerPlayer:
                         quintris_next_left.rotate()
                         quintris_next_left.rotate()
                         quintris_next_left.rotate()
-                    # Move pieces to the left 
+                    # Move pieces to the left - Depth 2
                     for next_left_left in range(0,quintris_next_left.get_piece()[2]):
                         quintris_next_left_left= copy.deepcopy(quintris_next_left)                                                
                         next_left_left_tracker=[]
-
+                        # Track the moves
                         for i in range(0,next_left_left):
                             quintris_next_left_left.left()
                             next_left_left_tracker.append("b")    
 
                         quintris_next_left_left.down()
+                        # Append the moves, board and the the value of of evaluation function 
                         move_tracker[rotate_move_next_left+"-_-"+rotate_move_left+"b"*len(next_left_left_tracker)] = (quintris_next_left_left.get_board(),self.evaluation_function(quintris_next_left_left.get_board(),"Weighted_row_coverage_and_lessgaps"))
+
+                    ## Move pieces to the right - Depth 2    
 
                     for next_left_right in range(0,15-quintris_next_left.get_piece()[2]):
                         quintris_next_left_right= copy.deepcopy(quintris_next_left)                       
                         next_left_right_tracker=[]
-
+                    # Track the moves 
                         for i in range(0,next_left_right):
                             quintris_next_left_right.right()
                             next_left_right_tracker.append("m")
-                        
+
                         quintris_next_left_right.down()
+                        # Append the moves, board and the the value of of evaluation function 
                         move_tracker[rotate_move_next_left+"-_-"+rotate_move_left+"m"*len(next_left_right_tracker)] = (quintris_next_left_right.get_board(),self.evaluation_function(quintris_next_left_right.get_board(),"Weighted_row_coverage_and_lessgaps"))
 
                 #--------------End: Look Ahead 2nd piece for boards with left moved pieces-----
@@ -396,7 +374,8 @@ class ComputerPlayer:
                         quintris_next_right.rotate()
                         quintris_next_right.rotate()
                         quintris_next_right.rotate()
-                     # Move pieces to the left 
+
+                    # Move pieces to the left - Depth 2
                     for next_right_left in range(0,quintris_next_right.get_piece()[2]):
                         quintris_next_right_left= copy.deepcopy(quintris_next_right)                        
                         next_right_left_tracker=[]
@@ -407,7 +386,8 @@ class ComputerPlayer:
                         
                         quintris_next_right_left.down()
                         move_tracker[rotate_move_next_right+"-_-"+rotate_move_right+"b"*len(next_right_left_tracker)] = (quintris_next_right_left.get_board(),self.evaluation_function(quintris_next_right_left.get_board(),"Weighted_row_coverage_and_lessgaps"))
-
+                    
+                    # Move pieces to the right - Depth 2
                     for next_right_right in range(0,15- quintris_next_right.get_piece()[2]):
                         quintris_next_right_right= copy.deepcopy(quintris_next_right)
                         next_right_right_tracker=[]
@@ -422,16 +402,11 @@ class ComputerPlayer:
                    
                 ########End - right pieces with next piece moved left amd right##########
 
-
-
-
-               
-      
-                    
+        #Get the first move for the boards generated by first and second moves         
         pos_moves=[x.split("-_-")[0] for x in move_tracker]
-        # print(pos_moves)
+        #Get the utility values for the boards generated by first and second moves   
         eval_moves=[move_tracker[x][1]  for x in move_tracker]
-        # print(eval_moves)
+        # Return the move that has the lowest evaluation value
         return pos_moves[eval_moves.index(min(eval_moves))]
 
     def control_game(self, quintris):
@@ -440,10 +415,10 @@ class ComputerPlayer:
             time.sleep(0.1)
 
             board = quintris.get_board()
-            ### remove the following code
-            print("The length of the board is", len(board))
-            ########
+            
+            #Get the moves from the get_moves function 
             moves=self.get_moves(quintris)
+        
             for move in moves:
                 if move == "b":
                     quintris.left()
