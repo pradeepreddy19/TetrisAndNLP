@@ -485,7 +485,7 @@ def weighted_pieces(board, player):
     pieces_on_board = dict(zip(unique, counts))
     
     max_weighted_pieces = 0
-    weights = [10,20,50]
+    weights = [1,2,10]
 
     for i, piece in enumerate(max_pieces):
         try:
@@ -494,7 +494,7 @@ def weighted_pieces(board, player):
             continue
 
     min_weighted_pieces = 0
-    weights = [10,20,50]
+    weights = [1,2,10]
 
     for i, piece in enumerate(min_pieces):
         try:
@@ -540,7 +540,17 @@ def pi_pik_travel(board, player):
         return 0
 
 def evaluation_func(board, player, opp_player):
-    weights = [7, 5, 1]
+    if player == 'w':
+        raichu = '@'
+    if player == 'b':
+        raichu = '$'
+    
+    unique, counts = np.unique(board, return_counts = True)
+    if raichu in unique:
+        weights = [15,8,1]
+    else:
+        weights = [7, 2, 5]
+    
     features = np.array([weighted_pieces(board, player),
                         jump_moves_avail(board, player)-jump_moves_avail(board, opp_player),
                         pi_pik_travel(board, player)-pi_pik_travel(board,opp_player)])
@@ -572,7 +582,6 @@ def find_best_move(board, N, player, timelimit):
         win = win_in_avail_moves(tree)
         if win[0]:
             choice_str = win[1]
-            print (choice_str)
             return choice_str
             
             
