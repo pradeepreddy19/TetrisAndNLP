@@ -575,6 +575,7 @@ def find_best_move(board, N, player, timelimit):
         win = win_in_avail_moves(tree)
         if win[0]:
             choice_str = win[1]
+            print (choice_str)
             return choice_str
             
             
