@@ -575,11 +575,13 @@ def find_best_move(board, N, player, timelimit):
         win = win_in_avail_moves(tree)
         if win[0]:
             choice_str = win[1]
+            return choice_str
+            
             
         else:
             d = len(tree)-1
             for i, group in enumerate(tree[d]):
-                group_max = [0,i,'']
+                group_max = [float('-inf'),i,'']
                 for j, node in enumerate(group):
                     node[3]=(evaluation_func(node[0], player, opp_player))
                     if node[3]> group_max[0]:
