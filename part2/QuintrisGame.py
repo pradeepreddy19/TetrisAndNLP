@@ -145,6 +145,3 @@ class QuintrisGame:
   def get_next_piece(self):
     return self.next_piece
 
-
-
-

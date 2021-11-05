@@ -1,10 +1,16 @@
 # Simple quintris program! v0.2
 # D. Crandall, Sept 2021
 
+from typing import ByteString
 from AnimatedQuintris import *
 from SimpleQuintris import *
 from kbinput import *
 import time, sys
+import copy 
+
+#Global Variable to check the initial iteration
+global best_move
+best_move=""
 
 class HumanPlayer:
     def get_moves(self, quintris):
@@ -75,8 +81,8 @@ class ComputerPlayer:
          #   print(i)
        # print(len(quintris.get_board()),"X", len(quintris.get_board()[0]))
        # print("***********************************This is where the code understanding snippets ends************************************")
-        moves_current= self.successor_boards(quintris.get_piece(),quintris.get_next_piece(),quintris.get_board())
-        
+        moves_current= self.successor_boards()
+        print("############################################3",moves_current)
         return moves_current
         
 
@@ -135,7 +141,9 @@ class ComputerPlayer:
                 if x_count==15:
                     line_filled+=1
                 
-            return gaps-height+column_gap-line_filled
+            return val+gaps*10#- 10000*line_filled + 1000*gaps
+
+            # +height+column_gap-10000*line_filled+val
 
 
         elif type_val=="less_gaps":
@@ -192,182 +200,240 @@ class ComputerPlayer:
     def legal_positions(self,x_positions,n_row,n_col):
          return sum([1 for x in x_positions if x[0]>=0 and x[0]<n_row and x[1]>=0 and x[1]<n_col]) == 5
 
-
-    def successor_boards(self,piece,next_piece,board):
-  
-        moves={}
-
-        x_row= piece[1]
-        x_col= piece[2]
-
-        possible_left=list(range(0,x_col))
-        possible_right=list(range(x_col+1,len(board[0])))
-        possible_moves= possible_left+possible_right
-
-        piece_copy=piece[0]
-        rotated_90 = [ "".join([ str[i] for str in piece_copy[::-1] ]) for i in range(0, len(piece_copy[0])) ]
-        rotated_pieces= { 0: ["",piece_copy], 90: ["n",rotated_90], 180: ["nn", [ str[::-1] for str in piece_copy[::-1] ]], 270: ["nnn",[ str[::-1] for str in rotated_90[::-1] ]] }
-        print("-----------------------------", rotated_pieces)
         
-        n_row=len(board)
-        n_col=len(board[0])
+    def successor_boards(self):
+
+        rotation=["0_N","0_H","90_N","90_H","180_N","180_H","270_N","270_H"]
+        move_tracker={}
+        for rotate_angle in rotation:
+            quintris_game=copy.deepcopy(quintris)
+            if rotate_angle=="0_N":
+                rotate_move=""
+
+            elif rotate_angle=="0_H":
+                rotate_move="h"
+                quintris_game.hflip()
+
+            elif rotate_angle=="90_N":
+                rotate_move="n"
+                quintris_game.rotate()
 
 
-        for each in rotated_pieces:
-             
-            piece=(rotated_pieces[each][1],x_row,x_col)
-            # if bloack return the number of ratations (n's)
-            if each ==0:
-                rotate_moves=""
-            else:
-                rotate_moves="n"*(int(each/90))
-            # Try moving the piece to all possible left and right positions and then calculate the evaluation function
-            for i in possible_moves:
-                x_positions=self.get_x_positions(piece,i)
-                # print(x_positions)
-                legal_pos_flg=self.legal_positions(x_positions,n_row,n_col)
-                # print(x_positions,legal_pos_flg)
-                if legal_pos_flg and x_col-i>0:
-                    moves[rotate_moves+"b"*(x_col-i)]=[x_positions,9999999]
-                elif legal_pos_flg:
-                    moves[rotate_moves+"m"*(i-x_col)]=[x_positions,9999999]
-            
-            
+            elif rotate_angle=="90_H":
+                rotate_move="hn"
+                quintris_game.hflip()
+                quintris_game.rotate()
 
-            # Try moving piece down:
-            for move in moves:
-                x_positions=moves[move][0].copy()
-                temp_board=board.copy()
 
-                for i in range(len(temp_board)):
-                # print("I love EAI class because of the ----",i)
-                    val=0
-                    flag=0
-                    val= sum([1 for j in x_positions if  temp_board[j[0]][j[1]]=="x"])
+            elif rotate_angle=="180_N":
+                rotate_move="nn"
+                quintris_game.rotate()
+                quintris_game.rotate()
 
-                    if val>0:      
-                        for i in range( len(x_positions)):
-                            x_positions[i][0]=x_positions[i][0]-1
-                        break
+            elif rotate_angle=="180_H":
+                rotate_move="hnn"
+                quintris_game.hflip()
+                quintris_game.rotate()
+                quintris_game.rotate()
 
-                    else:
-                        for i  in range(len( x_positions)):
-                            row_index=[i[0]   for i in x_positions]
-                            if max(row_index)<24:
-                                x_positions[i][0]=x_positions[i][0]+1
-                            else:
-                                flag=1
-                    if flag==1:
-                        break                    
-                # print(x_positions)
-                # print("Board before assignment")
-                # for i in temp_board:
-                #     print(i+"|||||")
-                for i in x_positions:
-                    temp_board[i[0]]= temp_board[i[0]][0:i[1]]+"x"+temp_board[i[0]][i[1]+1:]
-                # print("Board after assignment")
-                # for i in temp_board:
-                #     print(i+"|||||")
-        #         board_val_by_evaluation_function=self.evaluation_function(temp_board,"Weighted_row_coverage")
-        #         moves[move][1]=board_val_by_evaluation_function
-        # pos_moves=[x for x in moves]
-        # eval_moves=[moves[x][1]  for x in moves]
-        # return pos_moves[eval_moves.index(min(eval_moves))][0]
+            elif rotate_angle=="270_N":
+                rotate_move="nnn"
+                quintris_game.rotate()
+                quintris_game.rotate()
+                quintris_game.rotate()
 
-            
-##################################################################################################################################
-                tracked_move=move+"-_-"
-                temp_moves={}
-                piece_copy=next_piece.copy()
-                rotated_90 = [ "".join([ str[i] for str in piece_copy[::-1] ]) for i in range(0, len(piece_copy[0])) ]
-                rotated_pieces= { 0: ["",piece_copy], 90: ["n",rotated_90], 180: ["nn", [ str[::-1] for str in piece_copy[::-1] ]], 270: ["nnn",[ str[::-1] for str in rotated_90[::-1] ]] }
+            elif rotate_angle=="270_H":
+                rotate_move="hnnn"
+                quintris_game.hflip()
+                quintris_game.rotate()
+                quintris_game.rotate()
+                quintris_game.rotate()
+            # Move pieces to the left 
+            for left in range(0,quintris_game.get_piece()[2]):
+                quintris_game_copy= copy.deepcopy(quintris_game)
+                temp_board=quintris_game_copy.get_board()
                 
+                left_tracker=[]
+                for i in range(0,left):
+                    quintris_game_copy.left()
+
+                    left_tracker.append("b")
+                quintris_game_copy.down()
+
                 
-                n_row=len(temp_board)
-                n_col=len(temp_board[0])
+                #--------------Start: Look Ahead 2nd piece for boards with left moved pieces-----
+                rotate_move_next_left=rotate_move+"b"*len(left_tracker)
+
+                rotation_next_left=["0_N","0_H","90_N","90_H","180_N","180_H","270_N","270_H"]
+                
+                for rotate_angle_left in rotation_next_left:
+                    quintris_next_left= copy.deepcopy(quintris_game_copy)
+                    if rotate_angle_left=="0_N":
+                        rotate_move_left=""
+
+                    elif rotate_angle_left=="0_H":
+                        rotate_move_left="h"
+                        quintris_next_left.hflip()
+
+                    elif rotate_angle_left=="90_N":
+                        rotate_move_left="n"
+                        quintris_next_left.rotate()
 
 
-                for each in rotated_pieces:
-                    piece=(rotated_pieces[each][1],x_row,x_col)
-                    # if bloack return the number of ratations (n's)
-                    if each ==0:
-                        rotate_moves=""
-                    else:
-                        rotate_moves="n"*(int(each/90))
-                    ## Try moving the piece to all possible left and right positions and then calculate the evaluation function
-                    for i in possible_moves:
-                        x_positions=self.get_x_positions(piece,i)
-                        # print(x_positions)
-                        legal_pos_flg=self.legal_positions(x_positions,n_row,n_col)
-                        # print(x_positions,legal_pos_flg)
-                        if legal_pos_flg and x_col-i>0:
-                            temp_moves[tracked_move+rotate_moves+"b"*(x_col-i)]=[x_positions,9999999]
-                        elif legal_pos_flg:
-                            temp_moves[tracked_move+rotate_moves+"m"*(i-x_col)]=[x_positions,9999999]
+                    elif rotate_angle_left=="90_H":
+                        rotate_move_left="hn"
+                        quintris_next_left.hflip()
+                        quintris_next_left.rotate()
+
+
+                    elif rotate_angle_left=="180_N":
+                        rotate_move_left="nn"
+                        quintris_next_left.rotate()
+                        quintris_next_left.rotate()
+
+                    elif rotate_angle_left=="180_H":
+                        rotate_move_left="hnn"
+                        quintris_next_left.hflip()
+                        quintris_next_left.rotate()
+                        quintris_next_left.rotate()
+
+                    elif rotate_angle_left=="270_N":
+                        rotate_move_left="nnn"
+                        quintris_next_left.rotate()
+                        quintris_next_left.rotate()
+                        quintris_next_left.rotate()
+
+                    elif rotate_angle_left=="270_H":
+                        rotate_move_left="hnnn"
+                        quintris_next_left.hflip()
+                        quintris_next_left.rotate()
+                        quintris_next_left.rotate()
+                        quintris_next_left.rotate()
+                    # Move pieces to the left 
+                    for next_left_left in range(0,quintris_next_left.get_piece()[2]):
+                        quintris_next_left_left= copy.deepcopy(quintris_next_left)                                                
+                        next_left_left_tracker=[]
+
+                        for i in range(0,next_left_left):
+                            quintris_next_left_left.left()
+                            next_left_left_tracker.append("b")    
+
+                        quintris_next_left_left.down()
+                        move_tracker[rotate_move_next_left+"-_-"+rotate_move_left+"b"*len(next_left_left_tracker)] = (quintris_next_left_left.get_board(),self.evaluation_function(quintris_next_left_left.get_board(),"Weighted_row_coverage_and_lessgaps"))
+
+                    for next_left_right in range(0,15-quintris_next_left.get_piece()[2]):
+                        quintris_next_left_right= copy.deepcopy(quintris_next_left)                       
+                        next_left_right_tracker=[]
+
+                        for i in range(0,next_left_right):
+                            quintris_next_left_right.right()
+                            next_left_right_tracker.append("m")
+                        
+                        quintris_next_left_right.down()
+                        move_tracker[rotate_move_next_left+"-_-"+rotate_move_left+"m"*len(next_left_right_tracker)] = (quintris_next_left_right.get_board(),self.evaluation_function(quintris_next_left_right.get_board(),"Weighted_row_coverage_and_lessgaps"))
+
+                #--------------End: Look Ahead 2nd piece for boards with left moved pieces-----
+
+                
+
+               
+            # Move pieces to the right
+            for right in range(0,15-quintris_game.get_piece()[2]):
+                quintris_game_copy= copy.deepcopy(quintris_game)                
+                right_tracker=[]
+
+                for i in range(0,right):
+                    quintris_game_copy.right()
+                    right_tracker.append("m")
+
+                quintris_game_copy.down()
+
+                ########Start - right pieces with next piece moved left amd right########
+                rotate_move_next_right=rotate_move+"m"*len(right_tracker)
+
+                rotation_next_right=["0_N","0_H","90_N","90_H","180_N","180_H","270_N","270_H"]
+                
+                for rotate_angle_right in rotation_next_right:
+                    quintris_next_right= copy.deepcopy(quintris_game_copy)
+                    if rotate_angle_right=="0_N":
+                        rotate_move_right=""
+
+                    elif rotate_angle_right=="0_H":
+                        rotate_move_right="h"
+                        quintris_next_right.hflip()
+
+                    elif rotate_angle_right=="90_N":
+                        rotate_move_right="n"
+                        quintris_next_right.rotate()
+
+
+                    elif rotate_angle_right=="90_H":
+                        rotate_move_right="hn"
+                        quintris_next_right.hflip()
+                        quintris_next_right.rotate()
+
+
+                    elif rotate_angle_right=="180_N":
+                        rotate_move_right="nn"
+                        quintris_next_right.rotate()
+                        quintris_next_right.rotate()
+
+                    elif rotate_angle_right=="180_H":
+                        rotate_move_right="hnn"
+                        quintris_next_right.hflip()
+                        quintris_next_right.rotate()
+                        quintris_next_right.rotate()
+
+                    elif rotate_angle_right=="270_N":
+                        rotate_move_right="nnn"
+                        quintris_next_right.rotate()
+                        quintris_next_right.rotate()
+                        quintris_next_right.rotate()
+
+                    elif rotate_angle_right=="270_H":
+                        rotate_move_right="hnnn"
+                        quintris_next_right.hflip()
+                        quintris_next_right.rotate()
+                        quintris_next_right.rotate()
+                        quintris_next_right.rotate()
+                     # Move pieces to the left 
+                    for next_right_left in range(0,quintris_next_right.get_piece()[2]):
+                        quintris_next_right_left= copy.deepcopy(quintris_next_right)                        
+                        next_right_left_tracker=[]
+
+                        for i in range(0,next_right_left):
+                            quintris_next_right_left.left()
+                            next_right_left_tracker.append("b")
+                        
+                        quintris_next_right_left.down()
+                        move_tracker[rotate_move_next_right+"-_-"+rotate_move_right+"b"*len(next_right_left_tracker)] = (quintris_next_right_left.get_board(),self.evaluation_function(quintris_next_right_left.get_board(),"Weighted_row_coverage_and_lessgaps"))
+
+                    for next_right_right in range(0,15- quintris_next_right.get_piece()[2]):
+                        quintris_next_right_right= copy.deepcopy(quintris_next_right)
+                        next_right_right_tracker=[]
+
+                        for i in range(0,next_right_right):
+                            quintris_next_right_right.right()
+                            next_right_right_tracker.append("m")
+                        
+                        quintris_next_right_right.down()
+                        move_tracker[rotate_move_next_right+"-_-"+rotate_move_right+"m"*len(next_right_right_tracker)] = (quintris_next_right_right.get_board(),self.evaluation_function(quintris_next_right_right.get_board(),"Weighted_row_coverage_and_lessgaps"))
+
+                   
+                ########End - right pieces with next piece moved left amd right##########
+
+
+
+
+               
+      
                     
-                    
+        pos_moves=[x.split("-_-")[0] for x in move_tracker]
+        # print(pos_moves)
+        eval_moves=[move_tracker[x][1]  for x in move_tracker]
+        # print(eval_moves)
+        return pos_moves[eval_moves.index(min(eval_moves))]
 
-                    # Try moving piece down:
-                    for temp_move in temp_moves:
-                        x_positions=temp_moves[temp_move][0].copy()
-                        next_temp_board=temp_board.copy()
-
-                        for i in range(len(next_temp_board)):
-                        # print("I love EAI class because of the ----",i)
-                            val=0
-                            flag=0
-                            val= sum([1 for j in x_positions if  next_temp_board[j[0]][j[1]]=="x"])
-
-                            if val>0:      
-                                for i in range( len(x_positions)):
-                                    x_positions[i][0]=x_positions[i][0]-1
-                                break
-
-                            else:
-                                for i  in range(len( x_positions)):
-                                    row_index=[i[0]   for i in x_positions]
-                                    if max(row_index)<24:
-                                        x_positions[i][0]=x_positions[i][0]+1
-                                    else:
-                                        flag=1
-                            if flag==1:
-                                break                    
-                        # print(x_positions)
-                        # print("Board before assignment")
-                        # for i in temp_board:
-                        #     print(i+"|||||")
-                        for i in x_positions:
-                            next_temp_board[i[0]]= next_temp_board[i[0]][0:i[1]]+"x"+next_temp_board[i[0]][i[1]+1:]
-                        # print("Board after assignment")
-                        # for i in temp_board:
-                        #     print(i+"|||||")
-
-        ##############################################################################################################
-                        print("The sucessor board is ")
-                        for each in next_temp_board:
-                            print(each)
-                        print("-------------")
-                        nothing=input()
-                        board_val_by_evaluation_function=self.evaluation_function(next_temp_board,"Weighted_row_coverage")
-                        temp_moves[temp_move][1]=board_val_by_evaluation_function
-                        # print("The value given by the evaluation function is ", board_val_by_evaluation_function)
-        
-        pos_moves=[x for x in temp_moves]
-        eval_moves=[temp_moves[x][1]  for x in temp_moves]
-        return pos_moves[eval_moves.index(min(eval_moves))].split("-_-")[0]
-
-        # return "bd"+str(self.evaluation_function(quintris.get_board(),"N_of_empty_blocks"))
-
-    # This is the version that's used by the animted version. This is really similar to get_moves,
-    # except that it runs as a separate thread and you should access various methods and data in
-    # the "quintris" object to control the movement. In particular:
-    #   - quintris.col, quintris.row have the current column and row of the upper-left corner of the 
-    #     falling piece
-    #   - quintris.get_piece() is the current piece, quintris.get_next_piece() is the next piece after that
-    #   - quintris.left(), quintris.right(), quintris.down(), and quintris.rotate() can be called to actually
-    #     issue game commands
-    #   - quintris.get_board() returns the current state of the board, as a list of strings.
-    #what
     def control_game(self, quintris):
         # another super simple algorithm: just move piece to the least-full column
         while 1:
@@ -377,17 +443,30 @@ class ComputerPlayer:
             ### remove the following code
             print("The length of the board is", len(board))
             ########
-            
-            
-            column_heights = [ min([ r for r in range(len(board)-1, 0, -1) if board[r][c] == "x"  ] + [100,] ) for c in range(0, len(board[0]) ) ]
-            index = column_heights.index(max(column_heights))
+            moves=self.get_moves(quintris)
+            for move in moves:
+                if move == "b":
+                    quintris.left()
+                elif move == "m":
+                    quintris.right()
+                elif move == "n":
+                    quintris.rotate()
+                elif move == "h":
+                    quintris.hflip()
+            quintris.down()
 
-            if(index < quintris.col):
-                quintris.left()
-            elif(index > quintris.col):
-                quintris.right()
-            else:
-                quintris.down()
+        
+                
+            
+            # column_heights = [ min([ r for r in range(len(board)-1, 0, -1) if board[r][c] == "x"  ] + [100,] ) for c in range(0, len(board[0]) ) ]
+            # index = column_heights.index(max(column_heights))
+
+            # if(index < quintris.col):
+            #     quintris.left()
+            # elif(index > quintris.col):
+            #     quintris.right()
+            # else:
+            #     quintris.down()
 
 
 ###################
