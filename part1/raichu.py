@@ -126,11 +126,9 @@ def possible_pikachu_moves(board, player):
     all_moves = []
     move_range = 3
     forward_moves = [(x*forward,0) for x in range(1,move_range+1)]
-    backward_moves=[(x*backward, 0) for x in range(1, move_range+1)]
     right_moves = [(0,x) for x in range(1, move_range+1)]
     left_moves = [(0,x*-1) for x in range(1, move_range+1)]
     all_moves.append(forward_moves)
-    all_moves.append(backward_moves)
     all_moves.append(right_moves)
     all_moves.append(left_moves)
 
@@ -140,7 +138,6 @@ def possible_pikachu_moves(board, player):
     
     moves_1_2 = []
     moves_1_2.append(forward_moves[:2])
-    moves_1_2.append(backward_moves[:2])
     moves_1_2.append(left_moves[:2])
     moves_1_2.append(right_moves[:2])
     
