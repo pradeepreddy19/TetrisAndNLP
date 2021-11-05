@@ -488,7 +488,7 @@ def weighted_pieces(board, player):
     pieces_on_board = dict(zip(unique, counts))
     
     max_weighted_pieces = 0
-    weights = [1,2,10]
+    weights = [10,20,50]
 
     for i, piece in enumerate(max_pieces):
         try:
@@ -497,7 +497,7 @@ def weighted_pieces(board, player):
             continue
 
     min_weighted_pieces = 0
-    weights = [1,2,10]
+    weights = [10,20,50]
 
     for i, piece in enumerate(min_pieces):
         try:
