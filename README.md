@@ -22,7 +22,7 @@ We first implemented the approach where we only consider the current piece. We a
 
 Unfortunately, the scores only went as high as 17.
 
-![](RackMultipart20211106-4-16864fh_html_cf9b86b19ae142b8.png)
+![](https://github.iu.edu/cs-b551-fa2021/jzayatz-prokkam-harmohan-a2/blob/master/high%20score%2017.png)
 
 **Evaluation Functions:-**
 
