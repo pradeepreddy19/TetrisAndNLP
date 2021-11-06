@@ -1,6 +1,6 @@
 ## Problem 1
 
-### Description of how your formulated the problem
+### Description of how you formulated the problem
 This is an adversarial search problem where a minimax algorithm can be applied.  There are two players taking turns playing a completely observable zero sum game. The player that starts first is the ‘max’ player and will pick the highest possible utility value from a choice of moves.  The player that goes second is the ‘min’ player.  The ‘min’ player will choose the minimum possible utility value from the choices given.  In this way, both players are playing optimally for themselves with is the least optimal for his or her opponent
 
 ### Abstraction:
