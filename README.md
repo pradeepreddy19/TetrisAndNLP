@@ -42,10 +42,6 @@ After observing the game played against the random AI and other students’ AIs,
 * Lastly, if the ‘max’ player is the equivalent of 3 raichus ahead, the priority is returned to taking opponent pieces to try to finish the game  
 Given the short horizon of the search tree, the evaluation function described above was able to generate moves that could win or play to a draw against other AI players.
 
-
-
-
-
 **Part - 2: The Game of Quintris:-**
 
 **Understanding the given problem:-**
@@ -68,7 +64,7 @@ To be honest, we initially ended up spending more time on creating our own funct
 
 We first implemented the approach where we only consider the current piece. We applied 5 evaluation functions and we were able to generate a non-zero score upto 10. We then added the next piece also into the equation. We did this by first rotating and flipping the current piece, generating all possible boards by moving each of those variations to left or right and then taking each of these boards and combining it with variations of the next piece. This resulted in a branching factor of 120.
 
-Unfortunately, the scores only went as high as 18.
+Unfortunately, the scores only went as high as 37. (could go higher upon more runs)
 
 ![](https://github.iu.edu/cs-b551-fa2021/jzayatz-prokkam-harmohan-a2/blob/master/highscore37.jpeg)
 
@@ -77,8 +73,7 @@ Unfortunately, the scores only went as high as 18.
 Reference- https://codemyroad.wordpress.com/2013/04/14/tetris-ai-the-near-perfect-player/
 
 While researching evaluation functions, we came across the above source from where we implemented the number of gaps, summation of height of every column, difference in adjacent column heights to get the bumps in the board and also the number of lines filled in a board. Apart from these, we also implemented our own evaluation function which is a weighted row coverage that assigns a higher score to a board if it has its pieces scattered across rather than all of them being mostly placed on a single row. We then take the minimum of this as the best move for the current piece. We tried different combinations of the evaluation functions and we set the sign for each by determining whether to maximize it or minimize it.
-
-We could still only go as high as 18 (with just half the board due to the issue of the top half not getting filled) and the minimum is still 0.
+With the combination of our own evaluation function and the lines filled evaluation function, we were able to get a score of 37 and we would always get a score that is atleast higher than 5. 
 
 **What could have possibly gone wrong? :-**
 
@@ -90,7 +85,7 @@ We could implement sub-option 2 that was discussed above to get a better perform
 
 **What has been turned in:-**
 
-Our code works well and can play a game and can get a non-zero score (5-10 on average). Although it works and does what it says it&#39;ll do, it is not the most optimal and will not perform as good in the tournaments.
+Our code works well and can play a game and can get a non-zero score (5-15 on average). Although it works and does what it says it&#39;ll do, it is not the most optimal and will not perform as good in the tournaments.
 
 **Part - 3: Truth be Told**
 
