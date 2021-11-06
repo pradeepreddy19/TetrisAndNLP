@@ -555,10 +555,10 @@ def evaluation_func(board, player, opp_player):
                         jump_moves_avail(board, player)-jump_moves_avail(board, opp_player),
                         pi_pik_travel(board, player)-pi_pik_travel(board,opp_player)])
     
-    if features[0]>12:
+    if features[0]>25:
         weights = [2, 1, 15]
     
-    if features[0]>30:
+    if features[0]>35:
         weights = [15,1,1]
     
     return sum(features*weights)
