@@ -60,4 +60,4 @@ At first when we ran the code without any addition to it, we obtained an accurac
 
 One problem we encountered during the implementation is that of very small values of total probability post multiplying that it kept becoming 0 due to the very large number of decimal places. This was taken care through the utilization of negative logarithmic functions. This helped scale the value to storable and comparable values. With this, we could compare the two probabilities for each of the classes to classify the sentences in the test dataset.
 
-We finally obtained an accuracy of 79.75% after implementing Naive-Bayes assumption on the Baysian classifier. It comes to show that although Naive-Bayes assumption doesn&#39;t always hold true, it definitely still performs reasonably well in the real world.
+We finally obtained an accuracy of 79.75% after implementing Naive-Bayes assumption on the Baysian classifier. It comes to show that although Naive-Bayes assumption doesn&#39;t always hold true, it definitely still performs reasonably well in the real world. 
