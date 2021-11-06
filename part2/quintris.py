@@ -107,7 +107,7 @@ class ComputerPlayer:
                 if x_count==15:
                     line_filled+=1
                 
-            return val-100*line_filled #+ 1000*gaps
+            return val-10000*line_filled #+ 1000*gaps
 
             # +height+column_gap-10000*line_filled+val
 
@@ -231,7 +231,10 @@ class ComputerPlayer:
                     quintris_game_copy.left()
 
                     left_tracker.append("b")
-                quintris_game_copy.down()
+                try :
+                    quintris_game_copy.down()
+                except EndOfGame:
+                    pass
 
                 # For each of the pieces repeat the process that we have earlier get the board at a depth of two
                 
@@ -291,8 +294,11 @@ class ComputerPlayer:
                         for i in range(0,next_left_left):
                             quintris_next_left_left.left()
                             next_left_left_tracker.append("b")    
-
-                        quintris_next_left_left.down()
+                        try :
+                            quintris_next_left_left.down()
+                        except EndOfGame:
+                            pass
+                        
                         # Append the moves, board and the the value of of evaluation function 
                         move_tracker[rotate_move_next_left+"-_-"+rotate_move_left+"b"*len(next_left_left_tracker)] = (quintris_next_left_left.get_board(),self.evaluation_function(quintris_next_left_left.get_board(),"Weighted_row_coverage_and_lessgaps"))
 
@@ -305,8 +311,11 @@ class ComputerPlayer:
                         for i in range(0,next_left_right):
                             quintris_next_left_right.right()
                             next_left_right_tracker.append("m")
-
-                        quintris_next_left_right.down()
+                        try :
+                            quintris_next_left_right.down()
+                        except EndOfGame:
+                            pass
+                       
                         # Append the moves, board and the the value of of evaluation function 
                         move_tracker[rotate_move_next_left+"-_-"+rotate_move_left+"m"*len(next_left_right_tracker)] = (quintris_next_left_right.get_board(),self.evaluation_function(quintris_next_left_right.get_board(),"Weighted_row_coverage_and_lessgaps"))
 
@@ -383,8 +392,11 @@ class ComputerPlayer:
                         for i in range(0,next_right_left):
                             quintris_next_right_left.left()
                             next_right_left_tracker.append("b")
+                        try :
+                            quintris_next_right_left.down()
+                        except EndOfGame:
+                            pass
                         
-                        quintris_next_right_left.down()
                         move_tracker[rotate_move_next_right+"-_-"+rotate_move_right+"b"*len(next_right_left_tracker)] = (quintris_next_right_left.get_board(),self.evaluation_function(quintris_next_right_left.get_board(),"Weighted_row_coverage_and_lessgaps"))
                     
                     # Move pieces to the right - Depth 2
@@ -395,8 +407,11 @@ class ComputerPlayer:
                         for i in range(0,next_right_right):
                             quintris_next_right_right.right()
                             next_right_right_tracker.append("m")
+                        try :
+                            quintris_next_right_right.down()
+                        except EndOfGame:
+                            pass
                         
-                        quintris_next_right_right.down()
                         move_tracker[rotate_move_next_right+"-_-"+rotate_move_right+"m"*len(next_right_right_tracker)] = (quintris_next_right_right.get_board(),self.evaluation_function(quintris_next_right_right.get_board(),"Weighted_row_coverage_and_lessgaps"))
 
                    
