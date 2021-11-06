@@ -70,7 +70,7 @@ We first implemented the approach where we only consider the current piece. We a
 
 Unfortunately, the scores only went as high as 18.
 
-![](https://github.iu.edu/cs-b551-fa2021/jzayatz-prokkam-harmohan-a2/blob/master/highscore18.jpeg)
+![](https://github.iu.edu/cs-b551-fa2021/jzayatz-prokkam-harmohan-a2/blob/master/highscore37.jpeg)
 
 **Evaluation Functions:-**
 
