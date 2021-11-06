@@ -20,9 +20,9 @@ To be honest, we initially ended up spending more time on creating our own funct
 
 We first implemented the approach where we only consider the current piece. We applied 5 evaluation functions and we were able to generate a non-zero score upto 10. We then added the next piece also into the equation. We did this by first rotating and flipping the current piece, generating all possible boards by moving each of those variations to left or right and then taking each of these boards and combining it with variations of the next piece. This resulted in a branching factor of 120.
 
-Unfortunately, the scores only went as high as 17.
+Unfortunately, the scores only went as high as 18.
 
-![](https://github.iu.edu/cs-b551-fa2021/jzayatz-prokkam-harmohan-a2/blob/master/high%20score%2017.png)
+![](https://github.iu.edu/cs-b551-fa2021/jzayatz-prokkam-harmohan-a2/blob/master/highscore18.jpeg)
 
 **Evaluation Functions:-**
 
@@ -30,7 +30,7 @@ Reference- https://codemyroad.wordpress.com/2013/04/14/tetris-ai-the-near-perfec
 
 While researching evaluation functions, we came across the above source from where we implemented the number of gaps, summation of height of every column, difference in adjacent column heights to get the bumps in the board and also the number of lines filled in a board. Apart from these, we also implemented our own evaluation function which is a weighted row coverage that assigns a higher score to a board if it has its pieces scattered across rather than all of them being mostly placed on a single row. We then take the minimum of this as the best move for the current piece. We tried different combinations of the evaluation functions and we set the sign for each by determining whether to maximize it or minimize it.
 
-We could still only go as high as 17 and the minimum is still 0.
+We could still only go as high as 18 (with just half the board due to the issue of the top half not getting filled) and the minimum is still 0.
 
 **What could have possibly gone wrong? :-**
 
